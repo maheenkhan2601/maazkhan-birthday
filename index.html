@@ -49,7 +49,7 @@ html,body{
   font-size:22px;
   opacity:0;
   animation:fadeUp 2s ease forwards;
-  animation-delay:1.0s;
+  animation-delay:0.5s; /* appear faster */
 }
 
 .gallery{
@@ -152,22 +152,55 @@ p{
 }
 
 .final h1{font-size:48px;}
+
+/* ===== RESPONSIVE ===== */
+@media only screen and (max-width:768px){
+  section{
+    padding:50px 10%;
+  }
+  .box{
+    padding:30px 20px;
+    max-width:90%;
+  }
+  h1{
+    font-size:32px;
+  }
+  p{
+    font-size:16px;
+    line-height:1.6;
+  }
+  .nav{
+    font-size:14px;
+  }
+  #birthdayIntro h1{
+    font-size:48px;
+  }
+  .subtitle{
+    font-size:16px;
+  }
+  .gallery{
+    font-size:14px;
+  }
+  .enterBtn{
+    padding:8px 18px;
+    font-size:14px;
+  }
+}
 </style>
 </head>
-
 <body>
 
-<!-- 🎵 BACKGROUND MUSIC -->
-<audio id="bgMusic" loop>
-  <source src="../maazkhan-birthday/music.mp3" type="audio/mpeg">
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- INTRO -->
 <div id="birthdayIntro">
   <h1>Happy Birthday 💙</h1>
   <div class="subtitle">To the love of my life</div>
-  <div class="gallery">Welcome to the  Gallery of Love Letters</div>
-  <button class="enterBtn" onclick="enterGallery()">Hello jee HUSBAND (Click & Turn Up the Volume)</button>
+  <div class="gallery">Welcome to the Art Gallery of Love Letters</div>
+  <button class="enterBtn" onclick="enterGallery()">Enter the Gallery 💖</button>
 </div>
 
 <!-- EXHIBIT I -->
@@ -265,33 +298,40 @@ Happy birthday, my love. Always and forever, you are my heart, my soul, and my w
 </p>
 </div></section>
 
-<!-- 👉 ALL OTHER EXHIBITS CONTINUE EXACTLY AS YOU WROTE (unchanged) -->
+
+<!-- ADD ALL OTHER EXHIBITS AS PREVIOUSLY WRITTEN -->
 
 <script>
 function enterGallery(){
-  document.getElementById('bgMusic').play();
-  document.getElementById('birthdayIntro').style.opacity=0;
-  setTimeout(()=>{
-    document.getElementById('birthdayIntro').remove();
-  },1200);
+  const music = document.getElementById('bgMusic');
+  music.volume = 0.6;
+  music.muted = false;
+  music.play().catch(err=>console.log("Music blocked:",err));
+
+  const intro = document.getElementById('birthdayIntro');
+  intro.style.transition = "opacity 1.2s ease";
+  intro.style.opacity = 0;
+  setTimeout(()=>intro.remove(),1200);
 }
 
 function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-/* heart cursor */
-document.addEventListener('mousemove',e=>{
-  const h=document.createElement('div');
-  h.className='heart';
-  h.innerHTML='💙';
-  h.style.left=e.clientX+'px';
-  h.style.top=e.clientY+'px';
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),1200);
-});
+// HEART CURSOR - Only on desktop
+if(window.innerWidth > 768){
+  document.addEventListener('mousemove', e=>{
+    const h=document.createElement('div');
+    h.className='heart';
+    h.innerHTML='💙';
+    h.style.left=e.clientX+'px';
+    h.style.top=e.clientY+'px';
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),1200);
+  });
+}
 
-/* word hover (safe) */
+// WORD HOVER EFFECT
 document.querySelectorAll('.letter').forEach(el=>{
   el.innerHTML = el.innerText.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 });
