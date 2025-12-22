@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>Happy Birthday Baby </title>
 
 <style>
@@ -30,6 +32,27 @@
     color:var(--white);
     font-family:'Georgia', serif;
     scroll-behavior:smooth;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-tap-highlight-color:transparent;
+  }
+  
+  /* Prevent text selection issues on mobile */
+  * {
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+  }
+  
+  /* Allow text selection in paragraphs */
+  p, .letter {
+    -webkit-user-select:text;
+    -moz-user-select:text;
+    -ms-user-select:text;
+    user-select:text;
   }
 
   /* ===== INTRO ===== */
@@ -82,10 +105,21 @@
     cursor:pointer;
     letter-spacing:1px;
     transition:0.3s ease;
+    position: relative;
+    z-index: 10000;
+    pointer-events: auto;
   }
   .enterBtn:hover{
     background:var(--light);
     color:var(--dark);
+  }
+  .enterBtn:active{
+    transform:scale(0.98);
+    opacity:0.9;
+  }
+  .enterBtn:focus{
+    outline:2px solid var(--light);
+    outline-offset:2px;
   }
 
   /* Animations */
@@ -107,16 +141,20 @@
     justify-content:center;
     align-items:center;
   }
+.box {
+  position: relative;
+  z-index: 10;
+  background: #06162f; /* dark blue */
+  border: 2px solid var(--light);
+  border-radius: 20px;
+  padding: 50px 40px;
+  max-width: 900px;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(143,201,255,0.2);
+}
 
-  .box{
-    background:rgba(143,201,255,0.1);
-    border:2px solid var(--light);
-    border-radius:20px;
-    padding:50px 40px;
-    max-width:900px;
-    text-align:center;
-    box-shadow:0 0 30px rgba(143,201,255,0.2);
-  }
+/* Floating messages behind everything */
+
 
   h1{
     font-size:42px;
@@ -135,8 +173,17 @@
     font-size:16px;
     color:var(--light);
     cursor:pointer;
+    padding:10px 15px;
+    display:inline-block;
+    min-height:44px; /* Minimum touch target size */
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
   }
   .nav:hover{text-decoration:underline;}
+  .nav:active{
+    opacity:0.7;
+  }
 
   /* ===== WORD HOVER ===== */
   .letter span{
@@ -165,30 +212,155 @@
   /* ===== RESPONSIVE ===== */
   @media only screen and (max-width:768px){
     section {
-      padding:50px 5%;
+      padding:40px 5%;
+      min-height:100vh;
     }
     .box {
-      padding:40px 20px;
-      max-width:95%;
+      padding:30px 20px;
+      max-width:100%;
+      margin:0 auto;
     }
-    h1 { font-size:20px; }
-    p { font-size:12px; line-height:1.8; }
-    .nav { font-size:16px; }
+    h1 { 
+      font-size:24px; 
+      margin-bottom:20px;
+    }
+    p { 
+      font-size:14px; 
+      line-height:1.8; 
+    }
+    .nav { 
+      font-size:14px;
+      padding:10px;
+      margin-top:30px;
+    }
 
     /* Intro screen */
-    #birthdayIntro h1 { font-size:34px; }
-    .subtitle { font-size:20px; }
-    .gallery { font-size:15px; }
+    #birthdayIntro {
+      padding:20px;
+    }
+    #birthdayIntro h1 { 
+      font-size:36px;
+      padding:0 10px;
+    }
+    .subtitle { 
+      font-size:18px;
+      padding:0 10px;
+    }
+    .gallery { 
+      font-size:14px;
+      padding:0 10px;
+    }
     .enterBtn {
-      padding:16px 22px;
-      font-size:10px;
-      border-radius:35px;
+      padding:14px 20px;
+      font-size:13px;
+      border-radius:25px;
+      margin-top:30px;
+      max-width:90%;
+      text-align:center;
+      word-wrap:break-word;
+      white-space:normal;
+      line-height:1.4;
+    }
+    
+    .final h1 {
+      font-size:32px;
     }
   }
+  
+  /* Extra small devices */
+  @media only screen and (max-width:480px){
+    section {
+      padding:30px 4%;
+    }
+    .box {
+      padding:25px 15px;
+    }
+    h1 { 
+      font-size:20px; 
+    }
+    p { 
+      font-size:13px; 
+      line-height:1.7;
+    }
+    
+    #birthdayIntro h1 { 
+      font-size:28px;
+    }
+    .subtitle { 
+      font-size:16px;
+    }
+    .gallery { 
+      font-size:13px;
+    }
+    .enterBtn {
+      padding:12px 16px;
+      font-size:12px;
+      max-width:95%;
+    }
+    
+    .final h1 {
+      font-size:26px;
+    }
+  }
+  
+  /* Landscape orientation on mobile */
+  @media only screen and (max-width:768px) and (orientation: landscape) {
+    section {
+      padding:30px 5%;
+      min-height:auto;
+    }
+    .box {
+      padding:25px 20px;
+    }
+    #birthdayIntro h1 {
+      font-size:32px;
+    }
+  }
+#floatingMessagesContainer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* sits behind the content boxes */
+}
+
+/* Ensure intro screen and button are always clickable */
+#birthdayIntro,
+#birthdayIntro * {
+  pointer-events: auto;
+  z-index: 9999;
+}
+
+.floatingMsg {
+  position: absolute; /* relative to container */
+  color: #8fc9ff;
+  font-family: 'Georgia', serif;
+  white-space: nowrap;
+}
+
+
+@keyframes floatFade {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  20% {
+    opacity: 0.45;
+  }
+  80% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+}
 
 </style>
 </head>
 <body>
+
+<!-- Floating background whispers -->
+<div id="floatingMessagesContainer"></div>
 
 <!-- BACKGROUND MUSIC -->
 <audio id="bgMusic" loop preload="auto">
@@ -304,11 +476,33 @@ function enterGallery(){
   intro.style.transition = "opacity 1.2s ease";
   intro.style.opacity = 0;
   setTimeout(()=>intro.remove(),1200);
+  
+  // Start floating messages after intro is dismissed (only once)
+  if (!messageInterval) {
+    setTimeout(() => {
+      const isMobile = window.innerWidth <= 768;
+      const interval = isMobile ? 800 : 400; // Slower on mobile for better performance
+      messageInterval = setInterval(createFloatingMessage, interval);
+    }, 1200);
+  }
 }
 
 function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
+
+// Add touch event handlers for nav links on mobile
+document.addEventListener('DOMContentLoaded', function() {
+  const navLinks = document.querySelectorAll('.nav');
+  navLinks.forEach(link => {
+    link.addEventListener('touchstart', function(e) {
+      this.style.opacity = '0.7';
+    });
+    link.addEventListener('touchend', function(e) {
+      this.style.opacity = '1';
+    });
+  });
+});
 
 // === HEART CURSOR - Desktop + Mobile ===
 function createHeart(x, y){
@@ -330,7 +524,181 @@ document.addEventListener('touchmove', e => {
 document.querySelectorAll('.letter').forEach(el=>{
   el.innerHTML = el.innerText.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 });
+const cuteMessages = [
+  "always you",
+  "soft love",
+  "my safe place",
+  "you feel like home",
+  "forever us",
+  "endlessly",
+  "Handsome Shohar",
+  "Baby",
+  "My JAAN",
+  "my heart chose you",
+  "warm hugs",
+  "quiet love",
+  "Hello jee",
+  "My handsome husband",
+  "I love you",
+   "you are my favorite feeling",
+  "loving you is easy",
+  "my heart found home",
+  "you + me = always",
+  "you feel like forever",
+  "my safest place is you",
+  "i choose you every day",
+  "soft love only",
+  "your name lives in my heart",
+  "you are my calm",
+  "with you, everything feels right",
+  "my heart smiles for you",
+  "you are my comfort",
+  "endless love vibes",
+  "you are my peace",
+  "wrapped in your love",
+  "you are my person",
+  "i fall for you daily",
+  "you make my world softer",
+  "my heart knows you",
+  "quiet love, loud heart",
+  "you are my always",
+  "home is you",
+  "my favorite hello jee",
+  "you are my sweetest thought",
+  "forever feels like you",
+  "you hold my heart gently",
+  "i love the way you love me",
+  "your presence is my peace",
+  "you are my safe space",
+  "my heart chose you",
+  "loving you feels like magic",
+  "you complete my calm",
+  "you are my soft place to land",
+  "with you, i am home",
+  "you make love feel easy",
+  "my heart rests with you",
+  "you are my warm hug",
+  "endlessly yours",
+  "your love feels like sunlight",
+  "i carry you in my heart",
+  "you are my favorite thought",
+  "my love grows quietly",
+  "you are my gentle forever",
+  "you make everything glow",
+  "soft hearts, deep love",
+  "you are my sweetest constant",
+  "every heartbeat says you"
+];
+const msgContainer = document.getElementById('floatingMessagesContainer');
+let messageInterval = null; // Store interval ID to prevent duplicates
+
+// Function to get all box positions
+function getBoxPositions() {
+  const boxes = document.querySelectorAll('.box');
+  const positions = [];
+  boxes.forEach(box => {
+    const rect = box.getBoundingClientRect();
+    positions.push({
+      left: rect.left - 50, // Add padding to avoid edges
+      right: rect.right + 50,
+      top: rect.top - 50,
+      bottom: rect.bottom + 50
+    });
+  });
+  return positions;
+}
+
+// Check if a position overlaps with any box
+function isPositionOverlapping(x, y, boxPositions) {
+  return boxPositions.some(box => {
+    return x >= box.left && x <= box.right && 
+           y >= box.top && y <= box.bottom;
+  });
+}
+
+function createFloatingMessage() {
+  const msg = document.createElement('div');
+  msg.className = 'floatingMsg';
+  msg.innerText = cuteMessages[Math.floor(Math.random() * cuteMessages.length)];
+
+  const boxPositions = getBoxPositions();
+  const isMobile = window.innerWidth <= 768;
+  const maxX = window.innerWidth - (isMobile ? 100 : 150);
+  const maxY = window.innerHeight - (isMobile ? 30 : 50);
+  
+  // Try to find a position that doesn't overlap with boxes
+  let x, y;
+  let attempts = 0;
+  do {
+    x = Math.random() * maxX;
+    y = Math.random() * maxY;
+    attempts++;
+  } while (isPositionOverlapping(x, y, boxPositions) && attempts < 20);
+  
+  // If we couldn't find a good position after 20 attempts, place it at edges
+  if (attempts >= 20) {
+    // Place in corners or edges where boxes are less likely to be
+    const corners = [
+      { x: 10, y: 10 },
+      { x: maxX, y: 10 },
+      { x: 10, y: maxY },
+      { x: maxX, y: maxY }
+    ];
+    const corner = corners[Math.floor(Math.random() * corners.length)];
+    x = corner.x;
+    y = corner.y;
+  }
+
+  msg.style.left = x + "px";
+  msg.style.top = y + "px";
+
+  // Random size and opacity (smaller on mobile)
+  if (isMobile) {
+    msg.style.fontSize = (8 + Math.random() * 6) + "px";
+    msg.style.opacity = 0.2 + Math.random() * 0.4;
+  } else {
+    msg.style.fontSize = (12 + Math.random() * 16) + "px";
+    msg.style.opacity = 0.3 + Math.random() * 0.7;
+  }
+
+  (msgContainer || document.body).appendChild(msg);
+
+  // Animate upward and fade (shorter on mobile)
+  const duration = isMobile ? (3000 + Math.random() * 2000) : (4000 + Math.random() * 4000);
+  msg.animate([
+    { transform: `translateY(0px)`, opacity: msg.style.opacity },
+    { transform: `translateY(${isMobile ? '-60px' : '-80px'})`, opacity: 0 }
+  ], { duration: duration, easing: 'ease-out' });
+
+  // Remove after animation
+  setTimeout(() => msg.remove(), duration);
+}
+
+// Messages will start after intro is dismissed (see enterGallery function)
 </script>
+
+<style>
+.floatingMsg {
+  position: absolute;
+  pointer-events: none;
+  color: #8fc9ff;
+  font-family: 'Georgia', serif;
+  white-space: nowrap;
+  z-index: 5; /* appears around boxes, not behind them */
+  user-select: none;
+}
+
+/* Mobile optimizations for floating messages */
+@media only screen and (max-width:768px){
+  .floatingMsg {
+    font-size: 10px !important;
+    max-width: 120px;
+    white-space: normal;
+    word-wrap: break-word;
+  }
+}
+
+</style>
 
 </body>
 </html>
