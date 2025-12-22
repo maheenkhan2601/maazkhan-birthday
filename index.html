@@ -2,190 +2,189 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>A Love Exhibition</title>
 
 <style>
-:root{
-  --dark:#06162f;
-  --light:#8fc9ff;
-  --white:#eaf4ff;
-}
-
-*{box-sizing:border-box;}
-
-html,body{
-  margin:0;
-  padding:0;
-  background:var(--dark);
-  color:var(--white);
-  font-family:'Georgia', serif;
-  scroll-behavior:smooth;
-  overflow-x:hidden;
-}
-
-/* ===== INTRO ===== */
-#birthdayIntro{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at top, #0b2a55, #06162f);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  z-index:9999;
-}
-
-#birthdayIntro h1{
-  font-size:64px;
-  color:var(--light);
-  letter-spacing:2px;
-  text-shadow:0 0 30px rgba(143,201,255,0.7);
-  animation:titlePop 2.5s ease forwards;
-}
-
-.subtitle{
-  margin-top:10px;
-  font-size:22px;
-  opacity:0;
-  animation:fadeUp 2s ease forwards;
-  animation-delay:0.5s; /* appear faster */
-}
-
-.gallery{
-  margin-top:12px;
-  font-size:18px;
-  letter-spacing:1px;
-  opacity:0;
-  color:rgba(234,244,255,0.85);
-  animation:fadeUp 2s ease forwards;
-  animation-delay:1.2s;
-}
-
-.enterBtn{
-  margin-top:40px;
-  padding:12px 28px;
-  border:2px solid var(--light);
-  background:transparent;
-  color:var(--light);
-  font-size:16px;
-  border-radius:30px;
-  cursor:pointer;
-  letter-spacing:1px;
-  transition:0.3s ease;
-}
-.enterBtn:hover{
-  background:var(--light);
-  color:var(--dark);
-}
-
-/* Animations */
-@keyframes titlePop{
-  0%{opacity:0; transform:scale(0.6);}
-  60%{opacity:1; transform:scale(1.1);}
-  100%{transform:scale(1);}
-}
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px);}
-  to{opacity:1; transform:translateY(0);}
-}
-
-/* ===== SECTIONS ===== */
-section{
-  min-height:100vh;
-  padding:80px 15%;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-}
-
-.box{
-  background:rgba(143,201,255,0.1);
-  border:2px solid var(--light);
-  border-radius:20px;
-  padding:50px 40px;
-  max-width:900px;
-  text-align:center;
-  box-shadow:0 0 30px rgba(143,201,255,0.2);
-}
-
-h1{
-  font-size:42px;
-  color:var(--light);
-  margin-bottom:25px;
-}
-
-p{
-  font-size:18px;
-  line-height:1.9;
-}
-
-/* ===== NAV ===== */
-.nav{
-  margin-top:40px;
-  font-size:16px;
-  color:var(--light);
-  cursor:pointer;
-}
-.nav:hover{text-decoration:underline;}
-
-/* ===== WORD HOVER ===== */
-.letter span{
-  display:inline-block;
-  transition:0.3s ease;
-}
-.letter span:hover{
-  color:var(--light);
-  transform:translateY(-4px);
-}
-
-/* ===== HEART CURSOR ===== */
-.heart{
-  position:fixed;
-  font-size:14px;
-  pointer-events:none;
-  animation:float 1.2s ease-out forwards;
-}
-@keyframes float{
-  0%{opacity:1;}
-  100%{opacity:0; transform:translateY(-20px) scale(1.4);}
-}
-
-.final h1{font-size:48px;}
-
-/* ===== RESPONSIVE ===== */
-@media only screen and (max-width:768px){
-  section{
-    padding:50px 10%;
+  /* ===== PREVENT HORIZONTAL SCROLL ===== */
+  html, body {
+    overflow-x: hidden;
   }
-  .box{
-    padding:30px 20px;
-    max-width:90%;
+  * {
+    max-width: 100%;
+    word-wrap: break-word;
   }
-  h1{
-    font-size:36px; /* increased from 32px */
+
+  :root{
+    --dark:#06162f;
+    --light:#8fc9ff;
+    --white:#eaf4ff;
   }
-  p{
-    font-size:18px; /* increased from 16px */
-    line-height:1.8; /* slightly more spacing */
+
+  *{box-sizing:border-box;}
+
+  html,body{
+    margin:0;
+    padding:0;
+    background:var(--dark);
+    color:var(--white);
+    font-family:'Georgia', serif;
+    scroll-behavior:smooth;
   }
-  .nav{
-    font-size:16px; /* increased from 14px */
+
+  /* ===== INTRO ===== */
+  #birthdayIntro{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top, #0b2a55, #06162f);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    z-index:9999;
   }
+
   #birthdayIntro h1{
-    font-size:56px; /* increased from 48px */
+    font-size:64px;
+    color:var(--light);
+    letter-spacing:2px;
+    text-shadow:0 0 30px rgba(143,201,255,0.7);
+    animation:titlePop 2.5s ease forwards;
   }
+
   .subtitle{
-    font-size:20px; /* increased from 16px */
+    margin-top:10px;
+    font-size:22px;
+    opacity:0;
+    animation:fadeUp 2s ease forwards;
+    animation-delay:0.5s;
   }
+
   .gallery{
-    font-size:18px; /* increased from 14px */
+    margin-top:12px;
+    font-size:18px;
+    letter-spacing:1px;
+    opacity:0;
+    color:rgba(234,244,255,0.85);
+    animation:fadeUp 2s ease forwards;
+    animation-delay:1.2s;
   }
+
   .enterBtn{
-    padding:10px 22px;
-    font-size:16px; /* increased from 14px */
+    margin-top:40px;
+    padding:12px 28px;
+    border:2px solid var(--light);
+    background:transparent;
+    color:var(--light);
+    font-size:16px;
+    border-radius:30px;
+    cursor:pointer;
+    letter-spacing:1px;
+    transition:0.3s ease;
   }
-}
+  .enterBtn:hover{
+    background:var(--light);
+    color:var(--dark);
+  }
+
+  /* Animations */
+  @keyframes titlePop{
+    0%{opacity:0; transform:scale(0.6);}
+    60%{opacity:1; transform:scale(1.1);}
+    100%{transform:scale(1);}
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ===== SECTIONS ===== */
+  section{
+    min-height:100vh;
+    padding:80px 15%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+  }
+
+  .box{
+    background:rgba(143,201,255,0.1);
+    border:2px solid var(--light);
+    border-radius:20px;
+    padding:50px 40px;
+    max-width:900px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(143,201,255,0.2);
+  }
+
+  h1{
+    font-size:42px;
+    color:var(--light);
+    margin-bottom:25px;
+  }
+
+  p{
+    font-size:18px;
+    line-height:1.9;
+  }
+
+  /* ===== NAV ===== */
+  .nav{
+    margin-top:40px;
+    font-size:16px;
+    color:var(--light);
+    cursor:pointer;
+  }
+  .nav:hover{text-decoration:underline;}
+
+  /* ===== WORD HOVER ===== */
+  .letter span{
+    display:inline-block;
+    transition:0.3s ease;
+  }
+  .letter span:hover{
+    color:var(--light);
+    transform:translateY(-4px);
+  }
+
+  /* ===== HEART CURSOR ===== */
+  .heart{
+    position:fixed;
+    font-size:14px;
+    pointer-events:none;
+    animation:float 1.2s ease-out forwards;
+  }
+  @keyframes float{
+    0%{opacity:1;}
+    100%{opacity:0; transform:translateY(-20px) scale(1.4);}
+  }
+
+  .final h1{font-size:48px;}
+
+  /* ===== RESPONSIVE ===== */
+  @media only screen and (max-width:768px){
+    section {
+      padding:50px 5%;
+    }
+    .box {
+      padding:40px 20px;
+      max-width:95%;
+    }
+    h1 { font-size:20px; }
+    p { font-size:12px; line-height:1.8; }
+    .nav { font-size:16px; }
+
+    /* Intro screen */
+    #birthdayIntro h1 { font-size:34px; }
+    .subtitle { font-size:20px; }
+    .gallery { font-size:15px; }
+    .enterBtn {
+      padding:16px 22px;
+      font-size:10px;
+      border-radius:35px;
+    }
+  }
 
 </style>
 </head>
@@ -201,7 +200,7 @@ p{
   <h1>Happy Birthday 💙</h1>
   <div class="subtitle">To the love of my life</div>
   <div class="gallery">Welcome to the Art Gallery of Love Letters</div>
-  <button class="enterBtn" onclick="enterGallery()">Enter the Gallery 💖</button>
+  <button class="enterBtn" onclick="enterGallery()">Hello jee HUSBAND (Click & Turn Up the Volume)</button>
 </div>
 
 <!-- EXHIBIT I -->
@@ -265,7 +264,7 @@ I feel truly blessed to be yours. Being with you feels like home, like safety, l
 
 Never forget how loved you are, how appreciated you are, and how proud I am of the person you are becoming every day. I am always here standing beside you, cheering you on, and loving you in every season of life.
 </p>
-<div class="nav" onclick="goTo('ex7')">Continue →</div>
+
 </div></section>
 
 <!-- EXHIBIT VII -->
@@ -300,7 +299,10 @@ Happy birthday, my love. Always and forever, you are my heart, my soul, and my w
 </div></section>
 
 
-<!-- ADD ALL OTHER EXHIBITS AS PREVIOUSLY WRITTEN -->
+<section id="final" class="final"><div class="box">
+<h1>Happy Birthday</h1>
+<p class="letter">Happy birthday to the love of my life ... [full paragraph]</p>
+</div></section>
 
 <script>
 function enterGallery(){
@@ -330,23 +332,15 @@ function createHeart(x, y){
   setTimeout(() => h.remove(), 1200);
 }
 
-// Desktop mouse
-document.addEventListener('mousemove', e => {
-  createHeart(e.clientX, e.clientY);
-});
-
-// Mobile touch
+document.addEventListener('mousemove', e => createHeart(e.clientX, e.clientY));
 document.addEventListener('touchmove', e => {
-  for(let touch of e.touches){
-    createHeart(touch.clientX, touch.clientY);
-  }
+  for(let touch of e.touches) createHeart(touch.clientX, touch.clientY);
 });
 
 // WORD HOVER EFFECT
 document.querySelectorAll('.letter').forEach(el=>{
   el.innerHTML = el.innerText.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 });
-
 </script>
 
 </body>
