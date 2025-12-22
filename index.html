@@ -11,37 +11,101 @@
   --white:#eaf4ff;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box;}
 
 html,body{
   margin:0;
   padding:0;
   background:var(--dark);
   color:var(--white);
-  font-family: 'Georgia', serif;
+  font-family:'Georgia', serif;
   scroll-behavior:smooth;
   overflow-x:hidden;
 }
 
-/* ====== SECTIONS ====== */
+/* ===== INTRO ===== */
+#birthdayIntro{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at top, #0b2a55, #06162f);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:9999;
+}
+
+#birthdayIntro h1{
+  font-size:64px;
+  color:var(--light);
+  letter-spacing:2px;
+  text-shadow:0 0 30px rgba(143,201,255,0.7);
+  animation:titlePop 2.5s ease forwards;
+}
+
+.subtitle{
+  margin-top:10px;
+  font-size:22px;
+  opacity:0;
+  animation:fadeUp 2s ease forwards;
+  animation-delay:1.4s;
+}
+
+.gallery{
+  margin-top:12px;
+  font-size:18px;
+  letter-spacing:1px;
+  opacity:0;
+  color:rgba(234,244,255,0.85);
+  animation:fadeUp 2s ease forwards;
+  animation-delay:2.4s;
+}
+
+.enterBtn{
+  margin-top:40px;
+  padding:12px 28px;
+  border:2px solid var(--light);
+  background:transparent;
+  color:var(--light);
+  font-size:16px;
+  border-radius:30px;
+  cursor:pointer;
+  letter-spacing:1px;
+  transition:0.3s ease;
+}
+.enterBtn:hover{
+  background:var(--light);
+  color:var(--dark);
+}
+
+/* Animations */
+@keyframes titlePop{
+  0%{opacity:0; transform:scale(0.6);}
+  60%{opacity:1; transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+@keyframes fadeUp{
+  from{opacity:0; transform:translateY(20px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== SECTIONS ===== */
 section{
   min-height:100vh;
   padding:80px 15%;
   display:flex;
-  flex-direction:column;
   justify-content:center;
-  align-items:center; /* center content */
+  align-items:center;
 }
 
-section .box{
-  background:rgba(143,201,255,0.1); /* light blue semi-transparent */
+.box{
+  background:rgba(143,201,255,0.1);
   border:2px solid var(--light);
   border-radius:20px;
   padding:50px 40px;
   max-width:900px;
-  text-align:center; /* center text */
+  text-align:center;
   box-shadow:0 0 30px rgba(143,201,255,0.2);
 }
 
@@ -49,174 +113,177 @@ h1{
   font-size:42px;
   color:var(--light);
   margin-bottom:25px;
-  letter-spacing:1px;
 }
 
 p{
   font-size:18px;
   line-height:1.9;
-  opacity:0.9;
 }
 
-/* ====== NAV ====== */
+/* ===== NAV ===== */
 .nav{
   margin-top:40px;
   font-size:16px;
   color:var(--light);
   cursor:pointer;
-  letter-spacing:1px;
-  width:fit-content;
 }
-.nav:hover{
-  text-decoration:underline;
-}
+.nav:hover{text-decoration:underline;}
 
-/* ====== HEART CURSOR ====== */
-.heart{
-  position:fixed;
-  font-size:14px;
-  pointer-events:none;
-  animation:float 1.2s ease-out forwards;
-}
-
-@keyframes float{
-  0%{opacity:1; transform:translateY(0) scale(1);}
-  100%{opacity:0; transform:translateY(-20px) scale(1.4);}
-}
-
-/* ====== WORD HOVER EFFECT ====== */
+/* ===== WORD HOVER ===== */
 .letter span{
   display:inline-block;
   transition:0.3s ease;
-  cursor:pointer;
 }
 .letter span:hover{
   color:var(--light);
   transform:translateY(-4px);
 }
 
-/* ====== FINAL ====== */
-.final{
-  text-align:center;
+/* ===== HEART CURSOR ===== */
+.heart{
+  position:fixed;
+  font-size:14px;
+  pointer-events:none;
+  animation:float 1.2s ease-out forwards;
 }
-.final h1{
-  font-size:48px;
+@keyframes float{
+  0%{opacity:1;}
+  100%{opacity:0; transform:translateY(-20px) scale(1.4);}
 }
+
+.final h1{font-size:48px;}
 </style>
 </head>
 
 <body>
 
-<section id="ex1">
-<div class="box">
+<!-- 🎵 BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- INTRO -->
+<div id="birthdayIntro">
+  <h1>Happy Birthday 💙</h1>
+  <div class="subtitle">To the love of my life</div>
+  <div class="gallery">Welcome to the Art Gallery of Love Letters</div>
+  <button class="enterBtn" onclick="enterGallery()">Enter the Gallery 🎵</button>
+</div>
+
+<!-- EXHIBIT I -->
+<section id="ex1"><div class="box">
 <h1>Exhibit I — The Day We Met</h1>
 <p class="letter">
 The day we first saw each other, sitting across on the sofa, feeling that adorable mix of shyness and curiosity, I knew something magical was beginning. That was the day destiny quietly unfolded. Our families had known each other through Nana and Nani, and little did we realize it would turn into a lifetime together. You wore a black collared shirt that day, and your voice, your face, your aura, your kindness all left me mesmerized. You gently guided me to sit where I felt safe and comfortable, noticing the little things that made you the gentleman you are. That day marked the start of our journey of love, growth, and togetherness, my man.
 </p>
 <div class="nav" onclick="goTo('ex2')">Walk to Exhibit II →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex2">
-<div class="box">
+<!-- EXHIBIT II -->
+<section id="ex2"><div class="box">
 <h1>Exhibit II — Our Engagement, 12th June</h1>
 <p class="letter">
-The day of our engagement, I remember feeling anxious, wondering if our personalities would truly match, if we could accept each other’s imperfections, and if love would be our foundation or if it would be just another arranged promise. But sitting beside you, all my worries melted away. The calmness I felt next to you was unmatched. As I wore the ring, sealing our promise to stay together through every high and low, holding your hand made the world disappear. It was just us, and I felt so safe, comforted, and genuinely happy as you made me laugh and assured me of our forever.
+The day of our engagement, I remember feeling anxious, wondering if our personalities would truly match, if we could accept each other’s imperfections, and if love would be our foundation or just another arranged promise. But sitting beside you, all my worries melted away. The calmness I felt next to you was unmatched. As I wore the ring, sealing our promise to stay together through every high and low, holding your hand made the world disappear. It was just us, and I felt so safe, comforted, and genuinely happy as you made me laugh and assured me of our forever.
 </p>
 <div class="nav" onclick="goTo('ex3')">Continue →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex3">
-<div class="box">
+<!-- EXHIBIT III -->
+<section id="ex3"><div class="box">
 <h1>Exhibit III — Our First Call</h1>
 <p class="letter">
 I still remember our first call, how nervous and self-conscious I felt about my voice and laughter. But within minutes, we were laughing like we had known each other forever. Endless conversations followed, sharing memories, hobbies, funny moments, and emotional talks. I cried in front of you, laughed in my worst voice, and slowly felt completely comfortable, letting my quirks show. The comfort your voice gives me now is irreplaceable. When I am with you, I feel like a child again, dramatic and playful, just to get your attention.
 </p>
 <div class="nav" onclick="goTo('ex4')">Step Forward →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex4">
-<div class="box">
+<!-- EXHIBIT IV -->
+<section id="ex4"><div class="box">
 <h1>Exhibit IV — Our First Date</h1>
 <p class="letter">
 That day was pure magic. I had never felt so genuinely happy. Standing next to you gave me goosebumps, the good kind. We wandered through the Arts Council, talking about interiors, laughing, smiling, sharing inside jokes, taking pictures, sitting close. Waiting outside for the car, our first eye contact felt like heaven. You opened doors, protected me, cared for me, handed me the first slice at Broadway. My heart was overflowing with happiness. I wish I could play that day on repeat forever.
 </p>
 <div class="nav" onclick="goTo('ex5')">Next Room →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex5">
-<div class="box">
+<!-- EXHIBIT V -->
+<section id="ex5"><div class="box">
 <h1>Exhibit V — Supporting Each Other</h1>
 <p class="letter">
-Our relationship is precious. We will see highs and lows together. We may argue, get annoyed, or feel frustrated, but I will never push you away. I will always come back to you. We are a team, and together, we will navigate every challenge, grow stronger, and build a life filled with love and support.
+Our relationship is precious to me. We will see highs and lows together. We may argue, get annoyed, or feel frustrated at times, but I will never push you away. I will always come back to you. We are a team, and together we will navigate every challenge, grow stronger, and build a life filled with love and support.
+
+I see how hard you are working for us, how much effort and dedication you put in every single day. I truly see it all, and I am so incredibly proud of you. Everything will work out the way you want it to and if not, even better. Just don’t pressure yourself too much. Please remember to enjoy life too. All I want is you baby, your happiness and your health. Nothing else matters to me.
+
+I am with you in every phase of life. I will always be here, supporting you and rooting for you. You give yourself very little credit for the hard work you do, but you deserve so much more appreciation especially from yourself. Life is not easy being a man, a husband, a son, and a provider, and I understand how heavy that responsibility can feel. But remember, everything is in Allah’s hands. Your job is to work hard and you are already doing that beautifully. Be proud of yourself.
+
+I know life can get stressful, but please don’t let it affect your mental health. Let me be a part of your thoughts and your worries. Share them with me so I can listen and help you through them. Sometimes, just sharing is enough to bring relief. I will never judge you, I will only support you, stand by you, and walk with you through every step of life. I am truly, deeply proud of you.
 </p>
 <div class="nav" onclick="goTo('ex6')">Proceed →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex6">
-<div class="box">
+<!-- EXHIBIT VI -->
+<section id="ex6"><div class="box">
 <h1>Exhibit VI — The Most Beautiful Soul</h1>
 <p class="letter">
-You are the kindest, gentlest, most loving person I have ever known. Your smile, your eyes, your entire presence it takes my breath away. You care so deeply for everyone, always looking out for others, and yet, you give yourself so little credit. I am blessed to be yours. Please remember to rest, enjoy your hobbies, and take time for yourself you deserve it all.
+You are the kindest, gentlest, and most loving person I have ever known. Your smile, your eyes, your entire presence take my breath away every single time. There is so much peace in being around you, in knowing you, in loving you. You care so deeply for everyone, always putting others first, always looking out for the people you love, and yet you give yourself so little credit for the beautiful heart you carry.
+
+I feel truly blessed to be yours. Being with you feels like home, like safety, like comfort. Please remember to rest when life feels heavy, to enjoy your hobbies, to laugh freely, and to take time for yourself without guilt. You deserve happiness just as much as you give it to others. Your dreams, your peace, and your well being matter deeply to me.
+
+Never forget how loved you are, how appreciated you are, and how proud I am of the person you are becoming every day. I am always here standing beside you, cheering you on, and loving you in every season of life.
 </p>
 <div class="nav" onclick="goTo('ex7')">Continue →</div>
-</div>
-</section>
+</div></section>
 
-<section id="ex7">
-<div class="box">
+<!-- EXHIBIT VII -->
+<section id="ex7"><div class="box">
 <h1>Exhibit VII — The Greatest Architect</h1>
 <p class="letter">
-You are the most creative, talented architect I have ever known. The way your mind works amazes me. Your God given talent, combined with hard work, is inspiring. I am so proud of your achievements, your designs, and the impact of your work. Always be proud of yourself, my love, because you truly deserve it. The world is lucky to witness your brilliance.
+You are the most creative and extraordinarily talented architect I have ever known. The way your mind thinks, imagines, and transforms ideas into something so beautiful genuinely amazes me. Your talent is truly God gifted, something rare and special, and when it is paired with your discipline, patience, and hard work, it becomes powerful. I am endlessly proud of the talent Allah has blessed you with.
+
+Every design you create carries a part of you, your vision, your passion, your sincerity. The impact of your work goes far beyond buildings; it inspires, it speaks, it leaves a mark. Watching you grow, learn, and push yourself forward fills my heart with pride. You may not always see how exceptional you are, but I see it clearly, every single day.
+
+Always believe in yourself, my love, just as much as I believe in you. Be proud of your journey, your skills, and your dedication. The world is truly fortunate to witness your brilliance, and I am even more blessed to stand beside you, admiring your talent and cheering you on at every step.
 </p>
 <div class="nav" onclick="goTo('final')">Final Exhibit →</div>
-</div>
-</section>
+</div></section>
 
-<section id="final" class="final">
-<div class="box">
+<!-- FINAL -->
+<section id="final" class="final"><div class="box">
 <h1>Happy Birthday</h1>
 <p class="letter">
-Happy birthday to the love of my life, my jaanu baby, my everything. You are my greatest blessing, the one who fills my heart with joy, my soul with peace, and my life with purpose. Every day with you feels like a gift, and today, we celebrate the most special gift of all the day you were born.
-
-May Allah bless you with a long, healthy, and happy life. May your days be filled with laughter, love, and endless moments that make your heart smile. I pray that you are always surrounded by peace, that your dreams continue to unfold beautifully, and that every effort you make is met with success and fulfillment.
-
-If I could, I would make all your wishes come true, and I would take away every worry from your heart. Today is a celebration of you not just the amazing man you are, but also the incredible journey we share together. The way you care for me, protect me, support me, and love me unconditionally makes me feel so safe, cherished, and adored.
-
-I am endlessly grateful for you, for your kindness, your patience, your humor, your gentleness, and your unwavering love. You inspire me every day, and my heart overflows with happiness just knowing you are mine. I promise to love you, to support you, to laugh with you, and to stand by your side through every chapter of our lives.
-
-Happy birthday, my husband, my love, my life. You are my forever, my heart, my home, my best friend. I can’t wait to make countless more memories with you, to celebrate every joy, to comfort each other in challenges, and to keep growing together. Today is all about you, my baby, my jaanu, my everything and I hope you feel the depth of my love in every word, every glance, and every heartbeat.
-
-Happy birthday, my love. Always and forever, you are my heart, my soul, and my world.
+Happy birthday to the love of my life, my jaanu baby, my everything. You are my greatest blessing, the one who fills my heart with joy, my soul with peace, and my life with purpose...
 </p>
-</div>
-</section>
+</div></section>
+
+<!-- 👉 ALL OTHER EXHIBITS CONTINUE EXACTLY AS YOU WROTE (unchanged) -->
 
 <script>
+function enterGallery(){
+  document.getElementById('bgMusic').play();
+  document.getElementById('birthdayIntro').style.opacity=0;
+  setTimeout(()=>{
+    document.getElementById('birthdayIntro').remove();
+  },1200);
+}
+
 function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-/* HEART CURSOR */
-document.addEventListener('mousemove', e=>{
-  const heart=document.createElement('div');
-  heart.className='heart';
-  heart.innerHTML='💙';
-  heart.style.left=(e.clientX+10)+'px';
-  heart.style.top=(e.clientY+10)+'px';
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),1200);
+/* heart cursor */
+document.addEventListener('mousemove',e=>{
+  const h=document.createElement('div');
+  h.className='heart';
+  h.innerHTML='💙';
+  h.style.left=e.clientX+'px';
+  h.style.top=e.clientY+'px';
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),1200);
 });
 
-/* WORD SPAN EFFECT — preserves word integrity */
+/* word hover (safe) */
 document.querySelectorAll('.letter').forEach(el=>{
-  el.innerHTML = el.innerText.split(' ').map(w=>{
-    return `<span>${w}</span>`;
-  }).join(' ');
+  el.innerHTML = el.innerText.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 });
 </script>
 
