@@ -163,29 +163,30 @@ p{
     max-width:90%;
   }
   h1{
-    font-size:32px;
+    font-size:36px; /* increased from 32px */
   }
   p{
-    font-size:16px;
-    line-height:1.6;
+    font-size:18px; /* increased from 16px */
+    line-height:1.8; /* slightly more spacing */
   }
   .nav{
-    font-size:14px;
+    font-size:16px; /* increased from 14px */
   }
   #birthdayIntro h1{
-    font-size:48px;
+    font-size:56px; /* increased from 48px */
   }
   .subtitle{
-    font-size:16px;
+    font-size:20px; /* increased from 16px */
   }
   .gallery{
-    font-size:14px;
+    font-size:18px; /* increased from 14px */
   }
   .enterBtn{
-    padding:8px 18px;
-    font-size:14px;
+    padding:10px 22px;
+    font-size:16px; /* increased from 14px */
   }
 }
+
 </style>
 </head>
 <body>
@@ -209,7 +210,7 @@ p{
 <p class="letter">
 The day we first saw each other, sitting across on the sofa, feeling that adorable mix of shyness and curiosity, I knew something magical was beginning. That was the day destiny quietly unfolded. Our families had known each other through Nana and Nani, and little did we realize it would turn into a lifetime together. You wore a black collared shirt that day, and your voice, your face, your aura, your kindness all left me mesmerized. You gently guided me to sit where I felt safe and comfortable, noticing the little things that made you the gentleman you are. That day marked the start of our journey of love, growth, and togetherness, my man.
 </p>
-<div class="nav" onclick="goTo('ex2')">Walk to Exhibit II →</div>
+<div class="nav" onclick="goTo('ex2')">scroll down</div>
 </div></section>
 
 <!-- EXHIBIT II -->
@@ -218,7 +219,7 @@ The day we first saw each other, sitting across on the sofa, feeling that adorab
 <p class="letter">
 The day of our engagement, I remember feeling anxious, wondering if our personalities would truly match, if we could accept each other’s imperfections, and if love would be our foundation or just another arranged promise. But sitting beside you, all my worries melted away. The calmness I felt next to you was unmatched. As I wore the ring, sealing our promise to stay together through every high and low, holding your hand made the world disappear. It was just us, and I felt so safe, comforted, and genuinely happy as you made me laugh and assured me of our forever.
 </p>
-<div class="nav" onclick="goTo('ex3')">Continue →</div>
+
 </div></section>
 
 <!-- EXHIBIT III -->
@@ -227,7 +228,7 @@ The day of our engagement, I remember feeling anxious, wondering if our personal
 <p class="letter">
 I still remember our first call, how nervous and self-conscious I felt about my voice and laughter. But within minutes, we were laughing like we had known each other forever. Endless conversations followed, sharing memories, hobbies, funny moments, and emotional talks. I cried in front of you, laughed in my worst voice, and slowly felt completely comfortable, letting my quirks show. The comfort your voice gives me now is irreplaceable. When I am with you, I feel like a child again, dramatic and playful, just to get your attention.
 </p>
-<div class="nav" onclick="goTo('ex4')">Step Forward →</div>
+
 </div></section>
 
 <!-- EXHIBIT IV -->
@@ -236,7 +237,7 @@ I still remember our first call, how nervous and self-conscious I felt about my 
 <p class="letter">
 That day was pure magic. I had never felt so genuinely happy. Standing next to you gave me goosebumps, the good kind. We wandered through the Arts Council, talking about interiors, laughing, smiling, sharing inside jokes, taking pictures, sitting close. Waiting outside for the car, our first eye contact felt like heaven. You opened doors, protected me, cared for me, handed me the first slice at Broadway. My heart was overflowing with happiness. I wish I could play that day on repeat forever.
 </p>
-<div class="nav" onclick="goTo('ex5')">Next Room →</div>
+
 </div></section>
 
 <!-- EXHIBIT V -->
@@ -251,7 +252,7 @@ I am with you in every phase of life. I will always be here, supporting you and 
 
 I know life can get stressful, but please don’t let it affect your mental health. Let me be a part of your thoughts and your worries. Share them with me so I can listen and help you through them. Sometimes, just sharing is enough to bring relief. I will never judge you, I will only support you, stand by you, and walk with you through every step of life. I am truly, deeply proud of you.
 </p>
-<div class="nav" onclick="goTo('ex6')">Proceed →</div>
+
 </div></section>
 
 <!-- EXHIBIT VI -->
@@ -277,7 +278,7 @@ Every design you create carries a part of you, your vision, your passion, your s
 
 Always believe in yourself, my love, just as much as I believe in you. Be proud of your journey, your skills, and your dedication. The world is truly fortunate to witness your brilliance, and I am even more blessed to stand beside you, admiring your talent and cheering you on at every step.
 </p>
-<div class="nav" onclick="goTo('final')">Final Exhibit →</div>
+
 </div></section>
 
 <!-- FINAL -->
@@ -318,23 +319,34 @@ function goTo(id){
   document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
-// HEART CURSOR - Only on desktop
-if(window.innerWidth > 768){
-  document.addEventListener('mousemove', e=>{
-    const h=document.createElement('div');
-    h.className='heart';
-    h.innerHTML='💙';
-    h.style.left=e.clientX+'px';
-    h.style.top=e.clientY+'px';
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),1200);
-  });
+// === HEART CURSOR - Desktop + Mobile ===
+function createHeart(x, y){
+  const h = document.createElement('div');
+  h.className = 'heart';
+  h.innerHTML = '💙';
+  h.style.left = x + 'px';
+  h.style.top = y + 'px';
+  document.body.appendChild(h);
+  setTimeout(() => h.remove(), 1200);
 }
+
+// Desktop mouse
+document.addEventListener('mousemove', e => {
+  createHeart(e.clientX, e.clientY);
+});
+
+// Mobile touch
+document.addEventListener('touchmove', e => {
+  for(let touch of e.touches){
+    createHeart(touch.clientX, touch.clientY);
+  }
+});
 
 // WORD HOVER EFFECT
 document.querySelectorAll('.letter').forEach(el=>{
   el.innerHTML = el.innerText.split(' ').map(w=>`<span>${w}</span>`).join(' ');
 });
+
 </script>
 
 </body>
